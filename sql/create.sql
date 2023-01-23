@@ -1,0 +1,12 @@
+CREATE TABLE question (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+body TEXT
+);
+
+CREATE TABLE option (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+questionid INTEGER,
+body TEXT,
+correct INTEGER,
+FOREIGN KEY (question) REFERENCES question(id)
+);
