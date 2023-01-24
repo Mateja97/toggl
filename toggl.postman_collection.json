@@ -1,0 +1,176 @@
+{
+	"info": {
+		"_postman_id": "0661eca9-8e66-4781-9f9f-dbaf65126fd5",
+		"name": "toggl",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24567139"
+	},
+	"item": [
+		{
+			"name": "GetQuestions",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.Yt3L4ocGM7nuYpi0jruAKsPvMkns1iQqGqJPgbYRTVk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/questions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"questions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createQuestion",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.Yt3L4ocGM7nuYpi0jruAKsPvMkns1iQqGqJPgbYRTVk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"body\": \"Who is president of Serbia?\",\n        \"options\": [\n            {\n                \"body\": \"Aleksandar Vucic\",\n                \"correct\": true\n            },\n            {\n                \"body\": \"Svetislav Pesic\",\n                \"correct\": false\n            },\n            {\n                \"body\": \"Boris Tadic\",\n                \"correct\": false\n            },\n            {\n                \"body\": \"Haris Dzinovic\",\n                \"correct\": false\n            }\n        ]\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/questions",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"questions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateQuestion",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.Yt3L4ocGM7nuYpi0jruAKsPvMkns1iQqGqJPgbYRTVk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"body\": \"What is the capitol city of Serbia?\",\n\t\"options\":[\n\t\t{\n\t\t\t\"body\":    \"Belgrade\",\n\t\t\t\"correct\": true\n\t\t}, \n        {\n\t\t\t\"body\":    \"Kragujevac\",\n\t\t\t\"correct\": false\n\t\t}, {\n\t\t\t\"body\":    \"Nis\",\n\t\t\t\"correct\": false\n\t\t}\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/questions/5",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"questions",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteQuestion",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.Yt3L4ocGM7nuYpi0jruAKsPvMkns1iQqGqJPgbYRTVk",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/questions/5",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"questions",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPaginatedQuestions",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.Yt3L4ocGM7nuYpi0jruAKsPvMkns1iQqGqJPgbYRTVk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"limit\":1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/questions/5",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"questions",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

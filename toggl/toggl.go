@@ -3,9 +3,9 @@ package toggl
 import (
 	"context"
 	"database/sql"
-	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
 )
@@ -41,8 +41,9 @@ func (t *Toggl) Init(port string) error {
 	return nil
 }
 
+// StartupSql exec startup sql script for the database. USED FOR TESTS
 func (t *Toggl) StartupSql() error {
-	query, err := ioutil.ReadFile("../sql/startup.sql")
+	query, err := os.ReadFile("../sql/startup.sql")
 	if err != nil {
 		return err
 	}
@@ -52,20 +53,18 @@ func (t *Toggl) StartupSql() error {
 	return nil
 }
 
-func (t *Toggl) Run() error {
+func (t *Toggl) Run() {
 	log.Println("Toggl server is running on: ", t.server.Addr)
 	if err := t.server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 		log.Println("[ERROR] ListenAndServe failed, error: ", err)
-		return err
 	}
-	return nil
 }
 func (t *Toggl) Stop() {
 	if err := t.db.Close(); err != nil {
 		log.Println("[ERROR] Database failed to gracefuly shutdown, error:", err)
 	}
 	if err := t.server.Shutdown(context.Background()); err != nil {
-		log.Println("[ERROR] Http server failed to gracefuly shutdown, error:", err)
+		log.Println("[ERROR] Server failed to gracefuly shutdown, error:", err)
 	}
 	log.Println("Toggl terminated successfuly")
 

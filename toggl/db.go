@@ -8,6 +8,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
+// dbGetAllQuestions returns all questions from the database
 func (t *Toggl) dbGetAllQuestions(ctx context.Context) ([]Question, error) {
 
 	tx, err := t.db.BeginTx(ctx, &sql.TxOptions{})
@@ -43,6 +44,8 @@ func (t *Toggl) dbGetAllQuestions(ctx context.Context) ([]Question, error) {
 	}
 	return questions, tx.Commit()
 }
+
+// dbGetQuestionsByID return seek pagination for provided offset and limit
 func (t *Toggl) dbGetQuestionsByID(ctx context.Context, question RequestQuestion) ([]Question, error) {
 	tx, err := t.db.BeginTx(ctx, &sql.TxOptions{})
 	if err != nil {
@@ -81,6 +84,7 @@ func (t *Toggl) dbGetQuestionsByID(ctx context.Context, question RequestQuestion
 	return questions, tx.Commit()
 }
 
+// dbGetOptionsByQuestion returns options for specified question
 func (t *Toggl) dbGetOptionsByQuestion(questionID int64) ([]Option, error) {
 	options := make([]Option, 0)
 	rows, err := t.db.Query("SELECT body,correct FROM option where questionid = $1", questionID)
@@ -98,6 +102,7 @@ func (t *Toggl) dbGetOptionsByQuestion(questionID int64) ([]Option, error) {
 	return options, nil
 }
 
+// dbInsertQuestion inserts provided question and all options
 func (t *Toggl) dbInsertQuestion(ctx context.Context, question Question) (Question, error) {
 	tx, err := t.db.BeginTx(ctx, &sql.TxOptions{})
 	if err != nil {
@@ -125,6 +130,7 @@ func (t *Toggl) dbInsertQuestion(ctx context.Context, question Question) (Questi
 	return question, tx.Commit()
 }
 
+// dbInsertOption inserts option for specified questionID
 func (t *Toggl) dbInsertOption(option Option, qID int64) error {
 	_, err := t.db.Exec("INSERT INTO option (questionid, body, correct) VALUES (?,?,?)", qID, option.Body, option.Correct)
 	if err != nil {
@@ -134,6 +140,7 @@ func (t *Toggl) dbInsertOption(option Option, qID int64) error {
 	return nil
 }
 
+// dbUpdateQuestion updates quesstion for specified ID, delete all options with specifiedID as questionID and import new ones
 func (t *Toggl) dbUpdateQuestion(ctx context.Context, question Question, ID int64) (Question, error) {
 	tx, err := t.db.BeginTx(ctx, &sql.TxOptions{})
 	if err != nil {
@@ -164,6 +171,7 @@ func (t *Toggl) dbUpdateQuestion(ctx context.Context, question Question, ID int6
 	return question, tx.Commit()
 }
 
+// dbDeleteQuestion deletes specified question and all related options
 func (t *Toggl) dbDeleteQuestion(ctx context.Context, ID int64) (int64, error) {
 	tx, err := t.db.BeginTx(ctx, &sql.TxOptions{})
 	if err != nil {
