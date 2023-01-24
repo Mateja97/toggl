@@ -10,7 +10,7 @@ import (
 	"testing"
 
 	"github.com/Mateja97/toggl/toggl"
-	"github.com/golang-jwt/jwt"
+	"github.com/golang-jwt/jwt/v4"
 )
 
 var CreateQuestion = toggl.Question{
@@ -44,7 +44,7 @@ var CreateQuestion2 = toggl.Question{
 	},
 }
 var tokenString = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.Yt3L4ocGM7nuYpi0jruAKsPvMkns1iQqGqJPgbYRTVk"
-var port = ":8081"
+var port = "8081"
 var questionsURL = fmt.Sprintf("http://localhost%s/questions/", port)
 var PaginationQuestion = &toggl.RequestQuestion{
 	Limit: 1,

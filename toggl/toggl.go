@@ -36,7 +36,7 @@ func (t *Toggl) Init(port string) error {
 	router.HandleFunc("/questions/{id}", t.deleteQuestion).Methods("DELETE")
 	t.server = &http.Server{
 		Handler: router,
-		Addr:    port,
+		Addr:    ":" + port,
 	}
 	return nil
 }
