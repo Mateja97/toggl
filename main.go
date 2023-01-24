@@ -1,7 +1,7 @@
 package main
 
 import (
-	"database/sql"
+	"log"
 	"os"
 	"os/signal"
 	"syscall"
@@ -10,12 +10,13 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-var db *sql.DB
-
 func main() {
 
+	port := os.Getenv("PORT")
 	t := toggl.Toggl{}
-	t.Init(":8080")
+	if err := t.Init(port); err != nil {
+		log.Fatal("[ERROR] Service failed to init, error: ", err)
+	}
 	go t.Run()
 	done := make(chan os.Signal, 1) // we need to reserve to buffer size 1, so the notifier are not blocked
 	signal.Notify(done, os.Interrupt, syscall.SIGTERM)
